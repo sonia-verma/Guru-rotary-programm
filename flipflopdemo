@@ -1,0 +1,46 @@
+  // this work is for SR flip flop Logic sstructure
+  // with the use of proper view user can get State of FlipFlop by code
+  
+  public ActionResult FlipFlop(FlipFlop oFlipFlop)
+        {
+         
+           try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (oFlipFlop.Rvalue == false && oFlipFlop.Svalue== true)
+                    {
+                        oFlipFlop.Qvalue = "1";
+                        oFlipFlop.Qnotvalue = "0";
+                        oFlipFlop.State = "SET";
+                    }
+                    else if (oFlipFlop.Rvalue = true && oFlipFlop.Svalue == false)
+                    {
+
+                        oFlipFlop.Qvalue = "0";
+                        oFlipFlop.Qnotvalue = "1";
+                        oFlipFlop.State = "SET";
+                    }
+                    else if (oFlipFlop.Svalue == false && oFlipFlop.Svalue == false)
+                    {
+                        oFlipFlop.Qvalue = "0";
+                        oFlipFlop.Qnotvalue = "1";
+                        oFlipFlop.State = "Reset";
+
+                    }
+                    else if (oFlipFlop.Svalue == true && oFlipFlop.Rvalue == true)
+                    {
+                        oFlipFlop.Qnotvalue = "may be 1 or 0";
+                        oFlipFlop.Qvalue = "may be 1 or 0";
+                        oFlipFlop.State = "Unpredictable";
+                    }
+
+                }
+            }
+            catch(Exception e)
+            {
+                CustomHandleErrorAttribute.LogErrors(e);
+                return RedirectToAction("Error");
+            }
+            return View();
+        }
