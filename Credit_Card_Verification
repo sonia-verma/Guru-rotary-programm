@@ -1,0 +1,128 @@
+// this view file is for credit card verification 
+
+@model codefirst_approach.Models.CreditCardValidation
+<html>
+<body>
+    <h4>
+        Credit Card</h4>
+    @using (Html.BeginForm("Index", "CreditCard", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmCharge" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <tabel style="width: 80%; margin-left:100px;">
+        <tr>
+        <td>   
+        <div class="col-md-12">
+        <h4>Order Palced with ID{1po15sf4erfds_dgd69444dfg}</h4>
+            <fieldset>
+                <legend>Credit Card Details</legend>
+                <dl class="dl-horizontal">
+                    <dt>
+                        <label class="col-xs-3 control-label">
+                            Credit card type</label><br />
+                    </dt>
+                    <dd>
+                        <select class="form-control" name="cardType">
+                            <option value="">Select a type</option>
+                            <option value="Ae">American Express</option>
+                            <option value="Master">Master</option>
+                            <option value="Visa">Visa</option>
+                            <option value="Diners">Diners</option>
+                        </select>
+                    </dd>
+                    <dt>
+                        <label for="txtCardNumber">
+                            Card Number *</label>
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.CreditCardNumber, new { placeholder = "Card Number e.g 1234...*", id = "txtCardNumber" })
+                    </dd>
+                    <dt>
+                        <label for="txtCvc">
+                            Cvc *</label>
+                    </dt>
+                    <dd>
+                        <input type="text" id="txtCvc" placeholder="Security Code e.g 987*" />
+                    </dd>
+                    <dt>
+                        <label for="txtExpiryMonth">
+                            Expiry Month (MM) *</label>
+                    </dt>
+                    <dd>
+                        <input type="text" id="txtExpiryMonth" placeholder="01*" />
+                    </dd>
+                    <dt>
+                        <label for="txtExpiryYear">
+                            Expiry Year (YYYY) *</label>
+                    </dt>
+                    <dd>
+                        <input type="text" id="txtExpiryYear" placeholder="2015*" />
+                    </dd>
+                </dl>
+                <br /><br />
+                <input type="submit" value=" Pay " />
+            </fieldset>
+        </div></td>
+        <td>
+          <div class="col-md-12">
+        <fieldset>
+            <legend>Additional Detail </legend>
+            <div class="label-head">
+                @Html.LabelFor(model => model.CardHolderName)
+            </div>
+            <div class="input">
+                @Html.TextBoxFor(model => model.CardHolderName, new { id = "txtCardHolderName" })
+                @Html.ValidationMessageFor(model => model.CardHolderName)
+            </div>
+            <div class="label-head">
+                @Html.LabelFor(model => model.Amount)
+            </div>
+            <div class="input">
+                @Html.TextBoxFor(model => model.Amount, new { id = "txtAmount" })
+                @Html.ValidationMessageFor(model => model.Amount)
+            </div>
+            <div class="label-head">
+                @Html.LabelFor(model => model.AddressCountry)
+            </div>
+            <div class="input">
+                @Html.TextBoxFor(model => model.AddressCountry, new { id = "txtCountry" })
+            </div>
+            <div class="label-head">
+                @Html.LabelFor(model => model.AddressCity)
+            </div>
+            <div class="input">
+                @Html.TextBoxFor(model => model.AddressCity, new { id = "txtCity" })
+            </div>
+            <div class="label-head">
+                @Html.LabelFor(model => model.AddressLine1)
+            </div>
+            <div class="input">
+                @Html.TextBoxFor(model => model.AddressLine1, new { id = "txtAddress1" })
+                @Html.ValidationMessageFor(model => model.AddressLine1)
+            </div>
+            <div class="label-head">
+                @Html.LabelFor(model => model.AddressLine2)
+            </div>
+            <div class="input">
+                @Html.TextBoxFor(model => model.AddressLine2, new { id = "txtAddress2" })
+                @Html.ValidationMessageFor(model => model.AddressLine2)
+            </div>
+            <div class="label-head">
+                @Html.LabelFor(model => model.AddressPostcode)
+            </div>
+            <div class="input">
+                @Html.TextBoxFor(model => model.AddressPostcode, new { id = "txtPostcode" })
+                @Html.ValidationMessageFor(model => model.AddressPostcode)
+            </div>
+            <p>
+                @Html.HiddenFor(model => model.Token, new { id = "hdnToken" })
+                @Html.ActionLink("CreditCard", "Index", null, new { id = "btnCharge" })
+            </p>
+        </fieldset>
+    </div>
+        </td>
+        </tr>
+    </tabel>
+    }
+</body>
+</html>
